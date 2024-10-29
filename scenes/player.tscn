@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://c6wopivywyqtv"]
+
+[ext_resource type="Script" path="res://code/player.gd" id="1_65rhg"]
+[ext_resource type="Texture2D" uid="uid://c0dyec0ehxegw" path="res://icon.svg" id="2_vkbb3"]
+[ext_resource type="Texture2D" uid="uid://ch8qhvn15asro" path="res://assets/FallingForItPointer.png" id="3_d7ffh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dwh8x"]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_65rhg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_vkbb3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1.3, 1.3)
+shape = SubResource("CircleShape2D_dwh8x")
+
+[node name="FallingForItPointer" type="Sprite2D" parent="."]
+texture = ExtResource("3_d7ffh")
+offset = Vector2(0, -20)
