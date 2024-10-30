@@ -7,6 +7,8 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_dwh8x"]
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 13
 script = ExtResource("1_65rhg")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -17,6 +19,6 @@ texture = ExtResource("2_vkbb3")
 scale = Vector2(1.3, 1.3)
 shape = SubResource("CircleShape2D_dwh8x")
 
-[node name="FallingForItPointer" type="Sprite2D" parent="."]
+[node name="Pointer" type="Sprite2D" parent="."]
 texture = ExtResource("3_d7ffh")
 offset = Vector2(0, -20)
