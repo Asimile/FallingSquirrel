@@ -22,3 +22,7 @@ shape = SubResource("CircleShape2D_dwh8x")
 [node name="Pointer" type="Sprite2D" parent="."]
 texture = ExtResource("3_d7ffh")
 offset = Vector2(0, -20)
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

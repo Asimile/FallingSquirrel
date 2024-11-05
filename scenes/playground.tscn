@@ -1,12 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://be45mp6jowkya"]
+[gd_scene load_steps=6 format=3 uid="uid://be45mp6jowkya"]
 
 [ext_resource type="PackedScene" uid="uid://c6wopivywyqtv" path="res://scenes/player.tscn" id="1_aclk7"]
+[ext_resource type="Texture2D" uid="uid://dwrs6lbov5eja" path="res://assets/FallingForItVine.png" id="2_l4xyw"]
+[ext_resource type="PackedScene" uid="uid://cfrsqqhq5qin8" path="res://scenes/hookpoint.tscn" id="3_xbp67"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lo2wo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rq3ba"]
 
 [node name="Playground" type="Node2D"]
+
+[node name="Player" parent="." node_paths=PackedStringArray("hook", "pinjoint") instance=ExtResource("1_aclk7")]
+position = Vector2(324, 296)
+hook = NodePath("../Hookpoint")
+pinjoint = NodePath("../PinJoint2D")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="Line2D" type="Line2D" parent="Player"]
+texture_repeat = 2
+texture = ExtResource("2_l4xyw")
+texture_mode = 1
+
+[node name="Hookpoint" parent="." instance=ExtResource("3_xbp67")]
+position = Vector2(324, 296)
 
 [node name="Area2D" type="RigidBody2D" parent="."]
 position = Vector2(157, 206)
@@ -35,11 +52,6 @@ position = Vector2(165, 176)
 scale = Vector2(1.84, 8.76)
 shape = SubResource("RectangleShape2D_lo2wo")
 
-[node name="Player" parent="." instance=ExtResource("1_aclk7")]
-position = Vector2(324, 296)
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(-3, -6)
 collision_mask = 2
@@ -47,3 +59,9 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(326, 332)
 shape = SubResource("RectangleShape2D_rq3ba")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+node_a = NodePath("../Player")
+
+[node name="TileMap" type="TileMap" parent="."]
+format = 2
