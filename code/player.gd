@@ -30,7 +30,7 @@ func _physics_process(delta):
 		if mouse_position.y <= position.y:
 			hooked = true
 			
-			hookRaycast.target_position = to_local(get_global_mouse_position()) * 10
+			hookRaycast.target_position = to_local(get_global_mouse_position()) * 5
 			hookRaycast.force_raycast_update()
 			if hookRaycast.is_colliding():
 				# Get values from raycast
@@ -46,6 +46,7 @@ func _physics_process(delta):
 	elif Input.is_action_just_released("click") and hooked:
 			hooked = false
 			pinjoint.node_b = NodePath("")
+			hook.global_position = Vector2(0, -250)
 	
 	if hooked:
 		line.clear_points()
@@ -99,3 +100,7 @@ func _animate(mouse_position, grounded, speed):
 	
 	if mouse_position.x < position.x:
 		anim_sprite.flip_h
+
+
+func _on_area_2d_body_entered(body):
+	get_tree().quit()

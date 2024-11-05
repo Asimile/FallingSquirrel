@@ -104,11 +104,11 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="Animation" id="Animation_aj07y"]
-resource_name = "idle"
-
 [sub_resource type="Animation" id="Animation_jutyr"]
 resource_name = "air"
+
+[sub_resource type="Animation" id="Animation_aj07y"]
+resource_name = "idle"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ieh5j"]
 _data = {
@@ -137,7 +137,7 @@ offset = Vector2(0, -20)
 position = Vector2(3, -6)
 sprite_frames = SubResource("SpriteFrames_3vx2p")
 animation = &"idle"
-frame_progress = 0.851623
+frame_progress = 0.598081
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
