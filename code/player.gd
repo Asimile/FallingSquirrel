@@ -5,10 +5,12 @@ var JUMP_STRENGTH = 800
 
 var mouse_position
 var hooked = false
+var previous_position
+var speed
 
+@onready var anim_sprite = $AnimatedSprite2D
 @onready var pointer = $Pointer
 @onready var hookRaycast = $RayCast2D
-
 @export var hook: StaticBody2D
 @export var pinjoint: PinJoint2D
 @onready var line = $Line2D
@@ -16,11 +18,11 @@ var hooked = false
 
 # Code that runs at the start of the game
 func _ready():
-	pass
+	previous_position = position
 
 # This is code that runs every single frame
 func _physics_process(delta):
-	$Sprite2D.rotation = 0
+	anim_sprite.rotation = -rotation
 	
 	mouse_position = get_global_mouse_position()
 	
@@ -52,7 +54,12 @@ func _physics_process(delta):
 	else:
 		line.clear_points()
 	
-	_animate(mouse_position)
+	# Calculate the distance moved since the last frame
+	var distance = position.distance_to(previous_position)
+	# Calculate the speed as distance / time and convert to int
+	speed = int(distance / delta)
+	# Update the previous position for the next calculation
+	previous_position = position
 	
 	# Physics code from video
 	var grounded = get_contact_count()>0
@@ -71,9 +78,10 @@ func _physics_process(delta):
 		apply_central_impulse(Vector2.UP * 400)
 	
 	#move_and_slide()
+	_animate(mouse_position, grounded, speed)
 	
 
-func _animate(mouse_position):
+func _animate(mouse_position, grounded, speed):
 	
 	# Grapple pointer points where player aims with mouse
 	pointer.look_at(mouse_position)
@@ -83,3 +91,11 @@ func _animate(mouse_position):
 			pointer.rotation = PI / 2
 		else:
 			pointer.rotation = -PI / 2
+	
+	if grounded and (speed < 10):
+		anim_sprite.play("idle")
+	else:
+		anim_sprite.play("jump")
+	
+	if mouse_position.x < position.x:
+		anim_sprite.flip_h
