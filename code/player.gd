@@ -26,6 +26,9 @@ func _physics_process(delta):
 	
 	mouse_position = get_global_mouse_position()
 	
+	if Input.is_action_just_pressed("teleport"):
+		position = mouse_position
+	
 	if Input.is_action_just_pressed("click") and not hooked:
 		if mouse_position.y <= position.y:
 			hooked = true
